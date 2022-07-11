@@ -1,0 +1,28 @@
+{
+  "name": "lms",
+  "version": "1.0.0",
+  "description": "Quan ly thu vien dai hoc thuy loi",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnsyimh/nodejs_lms.git"
+  },
+  "keywords": [
+    "lms"
+  ],
+  "author": "DreamLU",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jnsyimh/nodejs_lms/issues"
+  },
+  "homepage": "https://github.com/jnsyimh/nodejs_lms#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
