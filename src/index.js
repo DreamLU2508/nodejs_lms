@@ -3,7 +3,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const md5 = require('md5')
 const methodOverride = require('method-override')
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const path = require('path');
 
 const db = require('./config/db/index');
