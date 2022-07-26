@@ -1,5 +1,5 @@
 // const { render } = require('node-sass');
-const { render } = require('node-sass');
+// const { render } = require('node-sass');
 const Admin = require('../models/Admin');
 const md5 = require('md5');
 // const { mutipleMongooseToObject } = require('../../util/mongoose');
