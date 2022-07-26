@@ -1,0 +1,56 @@
+<div class="m-4">
+    <div class="row">
+        <h1>Thêm sách</h1>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <form method="POST" action="/books/store" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="book-name" class="form-label">Tên sách</label>
+                    <input type="text" class="form-control" id="book-name" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="book-author-name" class="form-label">Tên tác giả</label>
+                    <input type="text" class="form-control" id="book-author-name" name="author">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control d-none" type="file" id="book-image" name="image">
+                </div>
+                <div class="mb-3" style="width: fit-content;">
+                    <label for="date-purchase" class="form-label">Ngày mua</label>
+                    <input type="date" class="form-control" id="date-purchase" name="datePurchase">
+                </div>
+                <div class="mb-3 w-25">
+                    <label for="price" class="form-label">Giá</label>
+                    <input type="text" class="form-control" id="price" name="price">
+                </div>
+                <div class="mb-3 w-25">
+                    <label for="quantity" class="form-label">Số lượng</label>
+                    <input type="text" class="form-control" id="quantity" name="quantity">
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm sách</button>
+            </form>
+        </div>
+        <div class="col-4 d-flex flex-column">
+            <img class="flex-sm-shrink-0" id="book-img" src="/img/No_image_available.png" alt="" >
+            <button class="btn btn-primary mt-4 btn-img-book mx-auto">chọn ảnh</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var btnImgBook = $('.btn-img-book');
+        var bookImageFile = $('input[name="image"]');
+        var bookImage = document.getElementById('book-img');
+
+        btnImgBook.click(function () {
+            bookImageFile.click();
+        });
+
+        bookImageFile.change(function (e) {
+            bookImage.src = window.URL.createObjectURL(e.target.files[0]);
+        })
+    });
+    
+</script>

@@ -1,0 +1,72 @@
+<div class="m-4">
+    <h1>Tất cả thông tin người dùng</h1>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ảnh sách</th>
+                <th scope="col">Tên sách {{{sortable 'name' _sort}}}</th>
+                <th scope="col">Tác giả {{{sortable 'author' _sort}}}</th>
+                <th scope="col" colspan="3">giá {{{sortable 'price' _sort}}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each books}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td><img src="{{this.image}}" alt="" height="250px" width="150px"></td>
+                <td>{{this.name}}</td>
+                <td>{{this.author}}</td>
+                <td>{{this.price}}</td>
+                <td><a href="/books/{{this._id}}/edit" class="btn btn-link">sửa</a></td>
+                <td><a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-modal"
+                        data-bs-id="{{this._id}}">xóa</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- delete form --}}
+<form method="POST" name="delete-form"></form>
+
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xóa sách</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa sách này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger" id="btn-delete">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var deleteModal = document.getElementById('delete-modal');
+    var btnDelete = document.getElementById('btn-delete');
+    var formDelete = document.forms['delete-form'];
+    var userId;
+
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        userId = button.getAttribute('data-bs-id');
+        console.log(userId);
+    })
+
+    btnDelete.onclick =  function () {
+        formDelete.action = "/books/" + userId + "?_method=DELETE";
+        formDelete.submit();
+    }
+    console.log(btnDelete);
+
+
+</script>

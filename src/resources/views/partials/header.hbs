@@ -1,0 +1,23 @@
+<div class="home-content">
+    <i class="fa-solid fa-bars mx-4"></i>
+    {{!-- dropdown --}}
+    <div class="ms-auto mx-4 d-flex">
+        
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img class="img-user" src="/uploads/admin/{{admin.photo}}" alt="">
+            {{admin.name}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin/profile">Thông tin tài khoản</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/admin/change-password">Đổi mật khẩu</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/auth/logout">Đăng xuất</a></li>
+        </ul>
+    </div>
+</div>

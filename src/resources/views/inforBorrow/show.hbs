@@ -1,0 +1,31 @@
+<div class="m-4">
+    <h1>Tất cả thông tin mượn sách</h1>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Tài khoản </th>
+                <th scope="col">Tên sách</th>
+                <th scope="col">Ảnh sách </th>
+                <th scope="col">Ngày mượn</th>
+                <th scope="col">Ngày trả </th>
+                <th scope="col" colspan="2">Ngày hết hạn</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each InforBorrowBooks}}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{this.userId.name}}</td>
+                <td>{{this.userId.username}}</td>
+                <td>{{this.bookId.name}}</td>
+                <td><img src="{{this.bookId.image}}" alt="" height="250px" width="150px"></td>
+                <td>{{this.borrowDate}}</td>
+                <td>{{displayReturnBook this.returnDate}}</td>
+                <td>{{this.expirationDate}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

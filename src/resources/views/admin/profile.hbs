@@ -1,0 +1,51 @@
+<div class="m-4">
+    <div class="row">
+        <div class="col-8">
+            <form method="POST" action="/admin/edit?_method=PUT" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="admin-name" class="form-label">Tên</label>
+                    <input type="text" class="form-control" id="admin-name" name="name" value="{{admin.name}}">
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Tài khoản</label>
+                    <input type="text" class="form-control" id="username" disabled value="{{admin.username}}">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control d-none" type="file" id="admin-image" name="image">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" disabled value="{{admin.email}}">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{admin.phone}}">
+                </div>
+                <div class="mb-3 d-flex">
+                    <button type="submit" class="btn btn-primary">Sửa</button>
+                </div>
+            </form> 
+        </div>
+        <div class="col-4 d-flex flex-column">
+            <img id="profile-img" class="m-auto" src="/uploads/admin/{{admin.photo}}" alt="">
+            <button type="button" class="btn btn-primary mt-2 btn-profile-img m-auto">Chọn ảnh</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var btnImgAdmin = $('.btn-profile-img');
+        var adminImageFile = $('input[name="image"]');
+        var adminImage = document.getElementById('profile-img');
+
+        btnImgAdmin.click(function () {
+            adminImageFile.click();
+        });
+
+        adminImageFile.change(function (e) {
+            adminImage.src = window.URL.createObjectURL(e.target.files[0]);
+        })
+    });
+    
+</script>

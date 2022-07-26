@@ -1,0 +1,74 @@
+<div class="m-4">
+    <h1>Tất cả thông tin người dùng</h1>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên {{{sortable 'name' _sort}}}</th>
+                <th scope="col">Tài khoản {{{sortable 'username' _sort}}}</th>
+                <th scope="col">Email {{{sortable 'email' _sort}}}</th>
+                <th scope="col">Số Điện thoại {{{sortable 'phone' _sort}}}</th>
+                <th scope="col" colspan="3">Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.username}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phone}}</td>
+                <td>{{status this.status}}</td>
+                <td><a href="/users/{{this._id}}/edit" class="btn btn-link">sửa</a></td>
+                <td><a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#delete-modal"
+                        data-bs-id="{{this._id}}">xóa</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- delete form --}}
+<form method="POST" name="delete-form"></form>
+
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xóa người dùng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa người dùng này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger" id="btn-delete">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var deleteModal = document.getElementById('delete-modal');
+    var btnDelete = document.getElementById('btn-delete');
+    var formDelete = document.forms['delete-form'];
+    var userId;
+
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        userId = button.getAttribute('data-bs-id');
+        console.log(userId);
+    })
+
+    btnDelete.onclick =  function () {
+        formDelete.action = "/users/" + userId + "?_method=DELETE";
+        formDelete.submit();
+    }
+    console.log(btnDelete);
+
+
+</script>

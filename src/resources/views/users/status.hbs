@@ -1,0 +1,113 @@
+<div class="m-4">
+    <h1>Trạng thái người dùng</h1>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên {{{sortable 'name' _sort}}}</th>
+                <th scope="col">Tài khoản {{{sortable 'username' _sort}}}</th>
+                <th scope="col">Email {{{sortable 'email' _sort}}}</th>
+                <th scope="col">Số Điện thoại {{{sortable 'phone' _sort}}}</th>
+                <th scope="col" colspan="3">Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.username}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phone}}</td>
+                <td>{{status this.status}}</td>
+                <td><a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#activate-modal"
+                        data-bs-id="{{this._id}}">Kích hoạt</a></td>
+                <td><a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#deactivate-modal"
+                        data-bs-id="{{this._id}}">Hủy kích hoạt</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- activate form --}}
+<form method="POST" name="activate-form"></form>
+
+{{!-- deactivate form --}}
+<form method="POST" name="deactivate-form"></form>
+
+{{!-- modal activate user --}}
+<div class="modal fade" id="activate-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kích hoạt tài khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có muốn kích hoạt người dùng này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btn-ativate">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- modal deactivate user --}}
+<div class="modal fade" id="deactivate-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kích hoạt tài khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn hủy kích hoạt người dùng này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger" id="btn-deactivate">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var activateModal = document.getElementById('activate-modal');
+    var btnActivate = document.getElementById('btn-ativate');
+
+    var deactivateModal = document.getElementById('deactivate-modal');
+    var btnDeactivate = document.getElementById('btn-deactivate');
+
+    var formActivate = document.forms['activate-form'];
+    var formDeactivate = document.forms['deactivate-form'];
+    var userId;
+
+    activateModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        userId = button.getAttribute('data-bs-id');
+        console.log(userId);
+    })
+
+    deactivateModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        userId = button.getAttribute('data-bs-id');
+        console.log(userId);
+    })
+
+    btnActivate.onclick =  function () {
+        formActivate.action = "/users/" + userId + "/activate?_method=PATCH";
+        formActivate.submit();
+    }
+
+    btnDeactivate.onclick =  function () {
+        formDeactivate.action = "/users/" + userId + "/deactivate?_method=PATCH";
+        formDeactivate.submit();
+    }
+</script>
