@@ -19,6 +19,13 @@ class SiteController {
             returnBook: countReturnBook,
         })
     }
+
+    // [GET] /logout
+    logout(req, res, next) {
+        req.session.destroy();
+        res.redirect('/login');
+        return;
+    }
 }
 
 module.exports = new SiteController();

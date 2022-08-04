@@ -1,23 +1,26 @@
 const siteRouter = require('./site');
 const userRouter = require('./user');
 const bookRouter = require('./book');
-const authenticationRouter = require('./authentication');
+const authRouter = require('./auth');
 const adminRouter = require('./admin');
 const inforBorrowBookRouter = require('./inforBorrowBook');
-const loginMiddleware = require('../app/middlewares/LoginMiddleware')
+const authMiddleware = require('../app/middlewares/AuthMiddleware')
 
 function Route(app) {
-    app.use('/auth', authenticationRouter)
+    app.use('/login', authRouter);
+
+    //custom middleware
+    app.use(authMiddleware);
+
+    app.use('/', siteRouter);
     
-    app.use('/admin', loginMiddleware, adminRouter)    
+    app.use('/admin', adminRouter);
 
-    app.use('/', loginMiddleware, siteRouter);
+    app.use('/users', userRouter);
 
-    app.use('/users', loginMiddleware, userRouter);
+    app.use('/books', bookRouter);
 
-    app.use('/books', loginMiddleware, bookRouter);
-
-    app.use('/information-borrow', loginMiddleware, inforBorrowBookRouter);
+    app.use('/information-borrow', inforBorrowBookRouter);
 }
 
 module.exports = Route;

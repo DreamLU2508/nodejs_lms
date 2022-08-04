@@ -1,5 +1,4 @@
 // const { render } = require('node-sass');
-const md5 = require('md5');
 const User = require('../models/User');
 const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 // const { render } = require('node-sass');
