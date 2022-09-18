@@ -9,7 +9,6 @@ module.exports = function configPassport(passport) {
     };
 
     var veryfyCallback = (username, password, done) => {
-        console.log('?')
         Admin.findOne({ username: username })
             .then((admin) => {
                 if (!admin) {

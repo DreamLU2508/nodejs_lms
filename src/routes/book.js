@@ -1,7 +1,17 @@
 const express = require('express');
 const multer = require('multer');
 
-const upload = multer({ dest: './src/public/uploads/books' });
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './src/public/uploads/books')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+  })
+
+const upload = multer({ storage: storage });
+
 const router = express.Router();
 
 const bookController = require('../app/controllers/BookController');

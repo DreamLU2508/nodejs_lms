@@ -16,11 +16,11 @@
         <tbody>
             {{#each InforBorrowBooks}}
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.userId.name}}</td>
                 <td>{{this.userId.username}}</td>
                 <td>{{this.bookId.name}}</td>
-                <td><img src="{{this.bookId.image}}" alt="" height="250px" width="150px"></td>
+                <td><img src="/uploads/books/{{this.bookId.image}}" alt="" height="250px" width="150px"></td>
                 <td>{{this.borrowDate}}</td>
                 <td>{{displayReturnBook this.returnDate}}</td>
                 <td>{{this.expirationDate}}</td>

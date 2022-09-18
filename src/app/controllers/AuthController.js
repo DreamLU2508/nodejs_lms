@@ -13,6 +13,11 @@ class Authentication{
         console.log(req.session);
         res.redirect('/auth');
     }
+
+    // [GET] /login/reset-password
+    resetPassword(req, res, next) {
+        res.render('reset-password', {layout: false})
+    }
 }
 
 module.exports = new Authentication();

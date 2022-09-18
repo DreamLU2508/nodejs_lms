@@ -99,10 +99,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // custom middleware
-app.use((req, res, next) => {
-    console.log(req.user);
-    next();
-})
 app.use(sortMiddleware);
 
 //route

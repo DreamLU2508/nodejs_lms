@@ -7,6 +7,7 @@ const authController = require('../app/controllers/AuthController');
 require('../config/passport')
 
 router.get('/', authController.login);
+router.get('/reset-password', authController.resetPassword);
 router.post('/', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
     res.redirect('/');
 });
